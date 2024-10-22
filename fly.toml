@@ -1,0 +1,24 @@
+app = "vipervisionuni"
+
+kill_signal = "SIGINT"
+kill_timeout = 5
+
+[build]
+  dockerfile = "./Dockerfile"
+
+[env]
+  # Add any environment variables your app needs here
+
+[[services]]
+  http_checks = []
+  processes = ["app"]  # Ensure this is correct
+
+  [http_service]
+    auto_scheme = "https"
+    internal_port = 5000  # This should match the port your app listens on
+
+    [[http_service.ports]]
+      port = 80   # Exposes HTTP traffic
+
+    [[http_service.ports]]
+      port = 443  # Exposes HTTPS traffic
